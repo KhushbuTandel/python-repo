@@ -35,6 +35,18 @@ pipeline {
                 }
             }
         }
+         stage('Push to Docker Hub') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        sh '''
+                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+                        docker push khushbu1216/firstdockerimage/python-web-app:latest
+                        '''
+                    }
+                }
+            }
+        }
     }
     post {
         always {
