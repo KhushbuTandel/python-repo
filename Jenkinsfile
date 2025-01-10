@@ -42,8 +42,8 @@ pipeline {
     //                 }
     //             }
     //         }
-    //     }
-    // }
+        }
+    }
     post {
         always {
             cleanWs() // Clean up the workspace
