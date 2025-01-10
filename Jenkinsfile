@@ -31,19 +31,19 @@ pipeline {
                 }
             }
         }
-        stage('Push to Docker Hub') {
-            steps {
-                script {
-                    withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-                        sh '''
-                        echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        docker push mohitsalgotra/python-web-app:latest
-                        '''
-                    }
-                }
-            }
-        }
-    }
+    //     stage('Push to Docker Hub') {
+    //         steps {
+    //             script {
+    //                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+    //                     sh '''
+    //                     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    //                     docker push mohitsalgotra/python-web-app:latest
+    //                     '''
+    //                 }
+    //             }
+    //         }
+    //     }
+    // }
     post {
         always {
             cleanWs() // Clean up the workspace
