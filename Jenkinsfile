@@ -30,7 +30,7 @@ pipeline {
                 script {
                     // Build Docker image with a tag
                     sh '''
-                    docker build -t mohitsalgotra/python-web-app:latest -f Dockerfile .
+                    docker build -t khushbu1216/firstdockerimage/python-web-app:latest -f Dockerfile .
                     '''
                 }
             }
