@@ -9,14 +9,18 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 sh '''
-                pip3 install --user -r python_web_application/requirements.txt
+                # Install dependencies globally with --break-system-packages flag
+                pip3 install --user --break-system-packages -r python_web_application/requirements.txt
                 '''
             }
         }
         stage('Run Tests') {
             steps {
                 sh '''
+                # Ensure /usr/bin is in the PATH where pytest is located
                 export PATH=$PATH:/usr/bin
+                
+                # Run tests using pytest
                 pytest python_web_application/tests/
                 '''
             }
@@ -31,18 +35,6 @@ pipeline {
                 }
             }
         }
-    //     stage('Push to Docker Hub') {
-    //         steps {
-    //             script {
-    //                 withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
-    //                     sh '''
-    //                     echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-    //                     docker push mohitsalgotra/python-web-app:latest
-    //                     '''
-    //                 }
-    //             }
-    //         }
-        // }
     }
     post {
         always {
