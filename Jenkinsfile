@@ -16,7 +16,7 @@ pipeline {
         stage('Run Tests') {
             steps {
                 sh '''
-                export PATH=$PATH:/var/lib/jenkins/.local/bin
+                export PATH=$PATH:/usr/bin
                 pytest python_web_application/tests/
                 '''
             }
