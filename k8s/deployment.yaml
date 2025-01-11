@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-container
-        image: abkaur95/simple-web-app:latest
+        image: khushbu1216/pythonapp:latest
         ports:
         - containerPort: 5000
         env:
