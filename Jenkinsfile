@@ -30,7 +30,7 @@ pipeline {
                 script {
                     // Build Docker image with a tag
                     sh '''
-                    docker build -t khushbu1216/firstdockerimage/python-web-app:latest -f Dockerfile .
+                    docker build -t khushbu1216/pythonapp/python-web-app:latest -f Dockerfile .
                     '''
                 }
             }
@@ -41,7 +41,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
                         sh '''
                         echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
-                        docker push khushbu1216/firstdockerimage/python-web-app:latest
+                        docker push khushbu1216/pythonapp/python-web-app:latest
                         '''
                     }
                 }
