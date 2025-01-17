@@ -24,7 +24,7 @@ pipeline {
             sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
             
             // Now run pytest
-            sh 'pytest python_web_application/tests/'
+            sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
                 }
             }
         }
