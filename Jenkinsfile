@@ -1,11 +1,13 @@
 pipeline {
     agent any
+
     stages {
         stage('Clone Repository') {
             steps {
                 git branch: 'main', url: 'https://github.com/mohitkumar1313/python-repo.git'
             }
         }
+
         stage('Install Dependencies') {
             steps {
                 sh '''
@@ -14,16 +16,18 @@ pipeline {
                 '''
             }
         }
+
         stage('Run Tests') {
-    steps {
-        script {
-            // Update PATH to include local Python bin directory
-            sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
-            // Run the pytest command to execute tests
-            sh 'pytest python_web_application/tests/'
-                '''
+            steps {
+                script {
+                    // Update PATH to include local Python bin directory
+                    sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
+                    // Run the pytest command to execute tests
+                    sh 'pytest python_web_application/tests/'
+                }
             }
         }
+
         stage('Build Docker Image') {
             steps {
                 script {
@@ -34,7 +38,8 @@ pipeline {
                 }
             }
         }
-         stage('Push to Docker Hub') {
+
+        stage('Push to Docker Hub') {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
@@ -47,6 +52,7 @@ pipeline {
             }
         }
     }
+
     post {
         always {
             cleanWs() // Clean up the workspace
