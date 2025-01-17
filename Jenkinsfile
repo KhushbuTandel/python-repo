@@ -15,13 +15,12 @@ pipeline {
             }
         }
         stage('Run Tests') {
-            steps {
-                sh '''
-                # Ensure /usr/bin is in the PATH where pytest is located
-                export PATH=$PATH:/usr/bin
-                
-                # Run tests using pytest
-                pytest python_web_application/tests/
+    steps {
+        script {
+            // Update PATH to include local Python bin directory
+            sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
+            // Run the pytest command to execute tests
+            sh 'pytest python_web_application/tests/'
                 '''
             }
         }
