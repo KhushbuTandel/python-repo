@@ -1,0 +1,22 @@
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Trigger the workflow when there is a push to the 'main' branch
+  pull_request:
+    branches:
+      - main  # Trigger the workflow when a pull request is created for the 'main' branch
+
+jobs:
+  checkout:
+    runs-on: ubuntu-latest  # Run the pipeline on the latest Ubuntu runner
+
+    steps:
+    - name: Checkout code from GitHub
+      uses: actions/checkout@v2  # GitHub Action to checkout code
+      with:
+        repository: KhushbuTandel/python-repo  # GitHub repository to checkout
+        ref: main  # Branch to checkout (e.g., 'main')
+
+    # You can add more steps here like building the Docker image, running tests, etc.
