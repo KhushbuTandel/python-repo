@@ -18,12 +18,13 @@ pipeline {
         }
 
         stage('Run Tests') {
-            steps {
-                script {
-                    // Update PATH to include local Python bin directory
-                    sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
-                    // Run the pytest command to execute tests
-                    sh 'pytest python_web_application/tests/'
+    steps {
+        script {
+            // Add the location where pytest is installed to PATH
+            sh 'export PATH=$PATH:/var/lib/jenkins/.local/bin'
+            
+            // Now run pytest
+            sh 'pytest python_web_application/tests/'
                 }
             }
         }
