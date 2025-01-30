@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: 2
 
 image:
   repository: nginx
@@ -13,7 +13,7 @@ ingress:
   enabled: false
   annotations: {}
   hosts:
-    - host: chart-example.local
+    - host: nginx.local
       paths: []
   tls: []
 
