@@ -1,23 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "boo-chart.fullname" . }}
+  name: {{ include "nginx-chart.fullname" . }}
   labels:
-    app: {{ include "boo-chart.name" . }}
+    app: {{ include "nginx-chart.name" . }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ include "boo-chart.name" . }}
+      app: {{ include "nginx-chart.name" . }}
   template:
     metadata:
       labels:
-        app: {{ include "boo-chart.name" . }}
+        app: {{ include "nginx-chart.name" . }}
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: nginx
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
-            - name: http
-              containerPort: 80
+            - containerPort: 80
