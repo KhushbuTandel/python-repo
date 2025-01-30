@@ -1,10 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "boo-chart.fullname" . }}
+  name: {{ include "nginx-chart.fullname" . }}
 spec:
+  selector:
+    app: {{ include "nginx-chart.name" . }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
-  selector:
-    app: {{ include "boo-chart.name" . }}
+      targetPort: 80
+      protocol: TCP
